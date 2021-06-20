@@ -1,0 +1,44 @@
+package main
+
+import (
+	"log"
+	"net/http"
+
+	"github.com/aitorfernandez/roshambo/gateway/handler"
+	"github.com/aitorfernandez/roshambo/gateway/resolver"
+	"github.com/aitorfernandez/roshambo/gateway/schema"
+	"github.com/gorilla/mux"
+	"github.com/graph-gophers/graphql-go"
+)
+
+func die(err error) {
+	log.Fatalf("gateway %s", err.Error())
+}
+
+func main() {
+	var (
+		err error
+		sch string
+	)
+	if sch, err = schema.String(); err != nil {
+		die(err)
+	}
+
+	// Create the GraphQL handler.
+	gql := handler.NewGraphQL(
+		graphql.MustParseSchema(sch, resolver.New()),
+	)
+	m := mux.NewRouter().StrictSlash(true)
+	m.Handle("/graphql", gql)
+	m.Handle("/", handler.NewGraphiQL())
+
+	// Configure the HTTP server.
+	srv := &http.Server{
+		Addr:           ":4040",
+		Handler:        m,
+		MaxHeaderBytes: http.DefaultMaxHeaderBytes,
+	}
+	if err = srv.ListenAndServe(); err != nil {
+		die(err)
+	}
+}

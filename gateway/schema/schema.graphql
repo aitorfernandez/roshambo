@@ -1,0 +1,12 @@
+type Account {
+  id: ID!
+  email: String!
+}
+
+type Query {
+  account(id: ID!): Account!
+}
+
+schema {
+  query: Query
+}
