@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/aitorfernandez/roshambo/pkg/env"
 	pb "github.com/aitorfernandez/roshambo/proto"
 	"google.golang.org/grpc"
 )
@@ -17,7 +18,7 @@ func main() {
 		err error
 		lis net.Listener
 	)
-	if lis, err = net.Listen("tcp", ":5050"); err != nil {
+	if lis, err = net.Listen("tcp", env.MustHget("account", "addr")); err != nil {
 		die(err)
 	}
 

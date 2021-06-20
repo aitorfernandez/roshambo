@@ -8,6 +8,7 @@ import (
 	"github.com/aitorfernandez/roshambo/gateway/handler"
 	"github.com/aitorfernandez/roshambo/gateway/resolver"
 	"github.com/aitorfernandez/roshambo/gateway/schema"
+	"github.com/aitorfernandez/roshambo/pkg/env"
 	"github.com/gorilla/mux"
 	"github.com/graph-gophers/graphql-go"
 )
@@ -35,11 +36,13 @@ func main() {
 	)
 	m := mux.NewRouter().StrictSlash(true)
 	m.Handle("/graphql", gql)
-	m.Handle("/", handler.NewGraphiQL())
+	if env.MustHget("app", "env") == "dev" {
+		m.Handle("/", handler.NewGraphiQL())
+	}
 
 	// Configure the HTTP server.
 	srv := &http.Server{
-		Addr:           ":4040",
+		Addr:           env.MustHget("gateway", "addr"),
 		Handler:        m,
 		MaxHeaderBytes: http.DefaultMaxHeaderBytes,
 	}

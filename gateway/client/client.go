@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/aitorfernandez/roshambo/pkg/env"
 	"google.golang.org/grpc"
 )
 
@@ -18,7 +19,7 @@ func New() (*Client, error) {
 		c   = &Client{}
 		err error
 	)
-	if err = connGRPC(&c.accountConn, ":5050"); err != nil {
+	if err = connGRPC(&c.accountConn, env.MustHget("account", "addr")); err != nil {
 		return nil, err
 	}
 	return c, nil

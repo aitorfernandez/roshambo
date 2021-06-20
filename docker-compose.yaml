@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  # redis service for environment variables
+  roshambo_redis:
+    container_name: roshambo_redis
+    command: ["redis-server", "--appendonly", "yes"]
+    image: redis:latest
+    ports:
+      - 6379:6379
+    restart: unless-stopped
+    volumes:
+      - roshambo_redis:/data
+
+volumes:
+  roshambo_redis:
