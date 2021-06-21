@@ -7,6 +7,11 @@ type Query {
   account(id: ID!): Account!
 }
 
+type Mutation {
+  getStarted(email: String!): Boolean!
+}
+
 schema {
   query: Query
+  mutation: Mutation
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/aitorfernandez/roshambo/gateway/client"
 	"github.com/aitorfernandez/roshambo/gateway/handler"
+	"github.com/aitorfernandez/roshambo/gateway/middleware"
 	"github.com/aitorfernandez/roshambo/gateway/resolver"
 	"github.com/aitorfernandez/roshambo/gateway/schema"
 	"github.com/aitorfernandez/roshambo/pkg/env"
@@ -35,6 +36,7 @@ func main() {
 		graphql.MustParseSchema(sch, resolver.New(clt)),
 	)
 	m := mux.NewRouter().StrictSlash(true)
+	m.Use(middleware.Addr)
 	m.Handle("/graphql", gql)
 	if env.MustHget("app", "env") == "dev" {
 		m.Handle("/", handler.NewGraphiQL())
