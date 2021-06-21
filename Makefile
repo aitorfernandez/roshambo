@@ -1,3 +1,8 @@
+PG_DB = roshambo
+PG_URL = postgres://postgres:postgres@0.0.0.0:$(PG_PORT)/$(PG_DB)?sslmode=disable
+
+PG_ACCOUNT_PORT = 5410
+
 .PHONY: proto
 proto:
 	# go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
@@ -13,8 +18,25 @@ env:
 docker-up:
 	docker-compose -f docker-compose.yaml up -d --build --force-recreate --remove-orphans $(SRV)
 
+docker-exec-postgres:
+	docker exec -it roshambo_$(SRV)_postgres psql -U postgres -d $(PG_DB)
+
 docker-exec-redis:
 	docker exec -it roshambo_redis redis-cli
+
+#
+# Migrations
+#
+
+# brew install golang-migrate
+migrate-up:
+	@migrate -database $(PG_URL) -path ./$(SRV)/migrations up
+
+migrate-down:
+	@migrate -database $(PG_URL) -path ./$(SRV)/migrations down
+
+migrate-account:
+	make migrate-$(ACTION) SRV=account PG_PORT=$(PG_ACCOUNT_PORT)
 
 #
 # Services
