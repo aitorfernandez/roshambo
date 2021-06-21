@@ -1,6 +1,14 @@
 package model
 
 import (
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+	"strconv"
+	"strings"
+
+	"github.com/aitorfernandez/roshambo/pkg/env"
 	pb "github.com/aitorfernandez/roshambo/proto"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
@@ -47,4 +55,26 @@ func (a Account) Proto() *pb.Account {
 		ID:    a.ID,
 		Email: a.Email,
 	}
+}
+
+// GenerateToken generates a token.
+func (a Account) GenerateToken(ts int64, ip string) (string, error) {
+	var (
+		err    error
+		secret string
+		token  = fmt.Sprintf("%s%d%d%s", a.ID, a.LastRequestAt, ts, ip)
+	)
+	if secret, err = env.Hget("app", "secret"); err != nil {
+		return "", err
+	}
+	return strings.Join([]string{
+		strconv.FormatInt(ts, 10),
+		hex.EncodeToString(hmacsha256([]byte(secret), []byte(token))),
+	}, "-"), nil
+}
+
+func hmacsha256(key []byte, data []byte) []byte {
+	hash := hmac.New(sha256.New, key)
+	hash.Write(data)
+	return hash.Sum(nil)
 }

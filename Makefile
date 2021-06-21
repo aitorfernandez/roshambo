@@ -7,6 +7,7 @@ PG_ACCOUNT_PORT = 5410
 proto:
 	# go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
 	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/account.proto
+	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/mail.proto
 
 env:
 	docker exec -i roshambo_redis redis-cli < .env.dev.redis
@@ -47,3 +48,6 @@ run-gateway:
 
 run-account:
 	go run ./account/*.go
+
+run-mail:
+	go run ./mail/*.go

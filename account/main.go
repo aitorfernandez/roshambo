@@ -16,9 +16,10 @@ func die(err error) {
 
 func main() {
 	var (
-		err error
-		lis net.Listener
-		sto *store.Store
+		accSrv *accountServer
+		err    error
+		lis    net.Listener
+		sto    *store.Store
 	)
 	if lis, err = net.Listen("tcp", env.MustHget("account", "addr")); err != nil {
 		die(err)
@@ -26,9 +27,12 @@ func main() {
 	if sto, err = store.New(env.MustHget("account", "psql")); err != nil {
 		die(err)
 	}
+	if accSrv, err = newAccountServer(sto); err != nil {
+		die(err)
+	}
 
 	srv := grpc.NewServer()
-	pb.RegisterAccountServiceServer(srv, newAccountServer(sto))
+	pb.RegisterAccountServiceServer(srv, accSrv)
 	if err = srv.Serve(lis); err != nil {
 		die(err)
 	}
