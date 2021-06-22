@@ -8,6 +8,7 @@ proto:
 	# go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
 	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/account.proto
 	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/mail.proto
+	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/profile.proto
 
 env:
 	docker exec -i roshambo_redis redis-cli < .env.dev.redis
