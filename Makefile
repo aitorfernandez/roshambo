@@ -2,6 +2,7 @@ PG_DB = roshambo
 PG_URL = postgres://postgres:postgres@0.0.0.0:$(PG_PORT)/$(PG_DB)?sslmode=disable
 
 PG_ACCOUNT_PORT = 5410
+PG_PROFILE_PORT = 5430
 
 .PHONY: proto
 proto:
@@ -39,6 +40,9 @@ migrate-down:
 
 migrate-account:
 	make migrate-$(ACTION) SRV=account PG_PORT=$(PG_ACCOUNT_PORT)
+
+migrate-profile:
+	make migrate-$(ACTION) SRV=profile PG_PORT=$(PG_PROFILE_PORT)
 
 #
 # Services
