@@ -9,7 +9,7 @@ import (
 // New returns a new uid with prefix value.
 func New(str string) string {
 	return strings.Join([]string{
-		str[:2],
+		str[:3],
 		cuid.New(),
 	}, "_")
 }

@@ -8,8 +8,8 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	got := strings.Split(uid.New("teacher"), "_")[0]
-	if got != "acc" {
+	got := strings.Split(uid.New("test"), "_")[0]
+	if got != "tes" {
 		t.Errorf("want a correct prefix, got %s", got)
 	}
 }

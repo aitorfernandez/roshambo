@@ -18,7 +18,14 @@ message GetStartedReq {
   string IP = 2;
 }
 
+message ValidateTokenReq {
+  string ID = 1;
+  string IP = 2;
+  string token = 3;
+}
+
 service AccountService {
   rpc GetAccount(GetAccountReq) returns (Account);
   rpc GetStarted(GetStartedReq) returns (google.protobuf.BoolValue);
+  rpc ValidateToken(ValidateTokenReq) returns (Account);
 }

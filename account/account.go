@@ -100,3 +100,25 @@ func connGRPC(conn **grpc.ClientConn, addr string) error {
 	}
 	return nil
 }
+
+// ValidateToken validates GetStarted token.
+func (s accountServer) ValidateToken(ctx context.Context, req *pb.ValidateTokenReq) (*pb.Account, error) {
+	var (
+		a   *model.Account
+		err error
+	)
+	if a, err = s.store.Account(ctx, req.ID); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, status.Error(codes.NotFound, err.Error())
+		}
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+	if ok := a.ValidateToken(req.Token, req.IP); !ok {
+		return nil, status.Error(codes.Unauthenticated, "invalid token")
+	}
+	// UpdateLastRequestAt invalid the token for use again.
+	if a, err = s.store.UpdateLastRequestAt(ctx, a.ID, time.Now().Unix()); err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+	return a.Proto(), nil
+}

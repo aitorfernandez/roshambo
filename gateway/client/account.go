@@ -16,3 +16,8 @@ func (c Client) GetAccount(ctx context.Context, req *pb.GetAccountReq) (*pb.Acco
 func (c Client) GetStarted(ctx context.Context, req *pb.GetStartedReq) (*wrapperspb.BoolValue, error) {
 	return pb.NewAccountServiceClient(c.accountConn).GetStarted(ctx, req)
 }
+
+// ValidateToken sends ValidateAccess request to accountServer.
+func (c Client) ValidateToken(ctx context.Context, req *pb.ValidateTokenReq) (*pb.Account, error) {
+	return pb.NewAccountServiceClient(c.accountConn).ValidateToken(ctx, req)
+}

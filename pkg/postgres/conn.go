@@ -13,7 +13,7 @@ var (
 	once      sync.Once
 )
 
-func conn(dataSource string) (*sql.DB, error) {
+func open(dataSource string) (*sql.DB, error) {
 	var (
 		DB  *sql.DB
 		err error
@@ -27,11 +27,11 @@ func conn(dataSource string) (*sql.DB, error) {
 	return DB, err
 }
 
-// Open open up a connection to the database and returns a DB struct.
-func Open(dataSource string) (*sql.DB, error) {
+// Conn returns a connection to the database and returns a DB struct.
+func Conn(dataSource string) (*sql.DB, error) {
 	var err error
 	once.Do(func() {
-		defaultDB, err = conn(dataSource)
+		defaultDB, err = open(dataSource)
 	})
 	return defaultDB, err
 }

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/aitorfernandez/roshambo/pkg/env"
 	pb "github.com/aitorfernandez/roshambo/proto"
@@ -77,4 +78,23 @@ func hmacsha256(key []byte, data []byte) []byte {
 	hash := hmac.New(sha256.New, key)
 	hash.Write(data)
 	return hash.Sum(nil)
+}
+
+// ValidateToken validates a token with an account.
+func (a Account) ValidateToken(token, ip string) bool {
+	var (
+		err error
+		t   string
+		ts  int64
+	)
+	if ts, err = strconv.ParseInt(strings.Split(token, "-")[0], 10, 64); err != nil {
+		return false
+	}
+	if time.Now().Unix() > (ts + (15 * 60)) {
+		return false
+	}
+	if t, err = a.GenerateToken(ts, ip); err != nil {
+		return false
+	}
+	return t == token
 }

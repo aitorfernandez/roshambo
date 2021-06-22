@@ -15,7 +15,7 @@ type Store struct {
 
 // New creates a new Data.
 func New(dataSource string) (*Store, error) {
-	db, err := postgres.Open(dataSource)
+	db, err := postgres.Conn(dataSource)
 	if err != nil {
 		return nil, err
 	}
@@ -58,5 +58,20 @@ func (s Store) SetAccount(ctx context.Context, a *model.Account) (*model.Account
 	row := s.DB.QueryRowContext(
 		ctx, q, a.ID, a.Email, a.LastRequestAt,
 	)
+	return accountRow(row)
+}
+
+// UpdateLastRequestAt updates last_request_at for the given account.
+func (s Store) UpdateLastRequestAt(ctx context.Context, id string, requestAt int64) (*model.Account, error) {
+	q := `
+	update account
+	set
+	  last_request_at = $1
+	where
+	  id = $2
+	returning
+	  *
+	`
+	row := s.DB.QueryRowContext(ctx, q, requestAt, id)
 	return accountRow(row)
 }

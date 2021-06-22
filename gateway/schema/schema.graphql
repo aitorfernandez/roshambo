@@ -3,12 +3,24 @@ type Account {
   email: String!
 }
 
+type ValidateTokenPayload {
+  id: ID!
+  jwt: String!
+}
+
+input ValidateTokenInput {
+  id: ID!
+  token: String!
+}
+
 type Query {
   account(id: ID!): Account!
 }
 
 type Mutation {
   getStarted(email: String!): Boolean!
+
+  validateToken(input: ValidateTokenInput!): ValidateTokenPayload!
 }
 
 schema {

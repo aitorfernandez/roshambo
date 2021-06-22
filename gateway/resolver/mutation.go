@@ -5,7 +5,12 @@ import (
 
 	"github.com/aitorfernandez/roshambo/gateway/middleware"
 	pb "github.com/aitorfernandez/roshambo/proto"
+	"github.com/graph-gophers/graphql-go"
 )
+
+//
+// Account
+//
 
 type getStartedArgs struct {
 	Email string
@@ -21,4 +26,23 @@ func (r Resolver) GetStarted(ctx context.Context, args getStartedArgs) (bool, er
 		return false, err
 	}
 	return res.Value, nil
+}
+
+type validateTokenInput struct {
+	ID    graphql.ID
+	Token string
+}
+
+type validateTokenArgs struct {
+	Input validateTokenInput
+}
+
+// ValidateToken resolves validateToken mutation.
+func (r Resolver) ValidateToken(ctx context.Context, args validateTokenArgs) (*ValidateTokenPayloadResolver, error) {
+	res, err := r.client.ValidateToken(ctx, &pb.ValidateTokenReq{
+		ID:    gqlIDToString(args.Input.ID),
+		IP:    ctx.Value(middleware.RemoteAddrKey).(string),
+		Token: args.Input.Token,
+	})
+	return validateTokenRes(res, err)
 }
