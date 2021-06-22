@@ -11,6 +11,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gomodule/redigo v1.8.5
 	github.com/gorilla/mux v1.8.0
+	github.com/graph-gophers/dataloader v5.0.0+incompatible
 	github.com/graph-gophers/graphql-go v1.1.0
 	github.com/lib/pq v1.10.2
 	github.com/lucsky/cuid v1.2.0
