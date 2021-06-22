@@ -56,3 +56,6 @@ run-account:
 
 run-mail:
 	go run ./mail/*.go
+
+run-profile:
+	go run ./profile/*.go

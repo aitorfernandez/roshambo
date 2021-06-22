@@ -11,6 +11,7 @@ import (
 // Client wrapps a collection of gRPC clients.
 type Client struct {
 	accountConn *grpc.ClientConn
+	profileConn *grpc.ClientConn
 }
 
 // New creates a new Client.
@@ -20,6 +21,9 @@ func New() (*Client, error) {
 		err error
 	)
 	if err = connGRPC(&c.accountConn, env.MustHget("account", "addr")); err != nil {
+		return nil, err
+	}
+	if err = connGRPC(&c.profileConn, env.MustHget("profile", "addr")); err != nil {
 		return nil, err
 	}
 	return c, nil
