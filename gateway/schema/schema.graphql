@@ -1,6 +1,13 @@
 type Account {
   id: ID!
   email: String!
+  profile: Profile
+}
+
+type Profile {
+  accountID: ID!
+  avatar: String
+  username: String
 }
 
 type ValidateTokenPayload {

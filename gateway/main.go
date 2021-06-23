@@ -6,6 +6,7 @@ import (
 
 	"github.com/aitorfernandez/roshambo/gateway/client"
 	"github.com/aitorfernandez/roshambo/gateway/handler"
+	"github.com/aitorfernandez/roshambo/gateway/loader"
 	"github.com/aitorfernandez/roshambo/gateway/middleware"
 	"github.com/aitorfernandez/roshambo/gateway/resolver"
 	"github.com/aitorfernandez/roshambo/gateway/schema"
@@ -20,20 +21,21 @@ func die(err error) {
 
 func main() {
 	var (
-		clt *client.Client
+		c   *client.Client
 		err error
 		sch string
 	)
 	if sch, err = schema.String(); err != nil {
 		die(err)
 	}
-	if clt, err = client.New(); err != nil {
+	if c, err = client.New(); err != nil {
 		die(err)
 	}
 
 	// Create the GraphQL handler.
 	gql := handler.NewGraphQL(
-		graphql.MustParseSchema(sch, resolver.New(clt)),
+		graphql.MustParseSchema(sch, resolver.New(c)),
+		loader.New(c),
 	)
 	m := mux.NewRouter().StrictSlash(true)
 	m.Use(middleware.Addr)

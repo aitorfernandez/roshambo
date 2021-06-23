@@ -8,12 +8,16 @@ import (
 	"github.com/graph-gophers/dataloader"
 )
 
+var profileByAccountKey = ctxkey.New("profile_by_account")
+
 // Map holds the keys to batch fucntions.
 type Map map[ctxkey.Key]dataloader.BatchFunc
 
 // New returns a lookup map of context keys to batch functions.
 func New(c *client.Client) Map {
-	return Map{}
+	return Map{
+		profileByAccountKey: newProfileByAccountLoader(c),
+	}
 }
 
 // Attach attaches dataloaders to the request's context.
