@@ -11,6 +11,7 @@ proto:
 	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/account.proto
 	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/mail.proto
 	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/profile.proto
+	@protoc -I ./proto --go_out=plugins=grpc:. ./proto/stat.proto
 
 env:
 	docker exec -i roshambo_redis redis-cli < .env.dev.redis
@@ -63,3 +64,6 @@ run-mail:
 
 run-profile:
 	go run ./profile/*.go
+
+run-stat:
+	go run ./stat/*.go

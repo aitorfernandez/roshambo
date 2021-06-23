@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+message Stat {
+  string ID = 1;
+  string accountID = 2;
+  int32 computerMove = 3;
+  int32 playerMove = 4;
+  int32 round = 5;
+}
+
+message CreateStatReq {
+  Stat stat = 1;
+}
+
+message DeleteStatsByAccountReq {
+  string accountID = 1;
+}
+
+message DeleteStatsByAccountRes {
+  int32 rowsAffected = 1;
+}
+
+message ListStatsByAccountReq {
+  string accountID = 1;
+}
+
+message ListStatsByAccountRes {
+  repeated Stat stats = 1;
+}
+
+service StatService {
+  rpc CreateStat(CreateStatReq) returns (Stat);
+  rpc DeleteStatsByAccount(DeleteStatsByAccountReq) returns (DeleteStatsByAccountRes);
+  rpc ListStatsByAccount(ListStatsByAccountReq) returns (ListStatsByAccountRes);
+}
