@@ -27,6 +27,19 @@ services:
     volumes:
       - roshambo_profile_postgres:/var/lib/postgresql/data
 
+  roshambo_stat_postgres:
+    container_name: roshambo_stat_postgres
+    environment:
+      - POSTGRES_DB=roshambo
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    image: postgres:12-alpine
+    ports:
+      - 5440:5432
+    restart: unless-stopped
+    volumes:
+      - roshambo_stat_postgres:/var/lib/postgresql/data
+
   # redis service for environment variables
   roshambo_redis:
     container_name: roshambo_redis
@@ -41,4 +54,5 @@ services:
 volumes:
   roshambo_account_postgres:
   roshambo_profile_postgres:
+  roshambo_stat_postgres:
   roshambo_redis:

@@ -3,6 +3,7 @@ PG_URL = postgres://postgres:postgres@0.0.0.0:$(PG_PORT)/$(PG_DB)?sslmode=disabl
 
 PG_ACCOUNT_PORT = 5410
 PG_PROFILE_PORT = 5430
+PG_STAT_PORT = 5440
 
 .PHONY: proto
 proto:
@@ -43,6 +44,9 @@ migrate-account:
 
 migrate-profile:
 	make migrate-$(ACTION) SRV=profile PG_PORT=$(PG_PROFILE_PORT)
+
+migrate-stat:
+	make migrate-$(ACTION) SRV=stat PG_PORT=$(PG_STAT_PORT)
 
 #
 # Services
