@@ -42,3 +42,8 @@ func (r AccountResolver) Profile(ctx context.Context) (*ProfileResolver, error) 
 	}
 	return p, nil
 }
+
+// Stats resolves stats field.
+func (r AccountResolver) Stats(ctx context.Context) ([]*StatResolver, error) {
+	return newStatsByAccount(ctx, r.account.ID)
+}

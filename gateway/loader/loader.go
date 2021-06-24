@@ -9,6 +9,7 @@ import (
 )
 
 var profileByAccountKey = ctxkey.New("profile_by_account")
+var statsByAccountKey = ctxkey.New("stats_by_account")
 
 // Map holds the keys to batch fucntions.
 type Map map[ctxkey.Key]dataloader.BatchFunc
@@ -17,6 +18,7 @@ type Map map[ctxkey.Key]dataloader.BatchFunc
 func New(c *client.Client) Map {
 	return Map{
 		profileByAccountKey: newProfileByAccountLoader(c),
+		statsByAccountKey:   newStatsByAccountLoader(c),
 	}
 }
 

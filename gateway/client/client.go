@@ -12,6 +12,7 @@ import (
 type Client struct {
 	accountConn *grpc.ClientConn
 	profileConn *grpc.ClientConn
+	statConn    *grpc.ClientConn
 }
 
 // New creates a new Client.
@@ -24,6 +25,9 @@ func New() (*Client, error) {
 		return nil, err
 	}
 	if err = connGRPC(&c.profileConn, env.MustHget("profile", "addr")); err != nil {
+		return nil, err
+	}
+	if err = connGRPC(&c.statConn, env.MustHget("stat", "addr")); err != nil {
 		return nil, err
 	}
 	return c, nil
