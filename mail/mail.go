@@ -17,7 +17,6 @@ type mailServer struct{}
 
 // SendToken sends a send_token mail
 func (s mailServer) SendToken(ctx context.Context, req *pb.SendTokenReq) (*emptypb.Empty, error) {
-	// SEE: https://appliedgo.net/generics/
 	var (
 		body string
 		err  error

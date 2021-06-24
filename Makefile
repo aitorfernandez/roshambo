@@ -67,3 +67,15 @@ run-profile:
 
 run-stat:
 	go run ./stat/*.go
+
+run-test-go:
+	go test ./...
+
+run-app:
+	cd app && yarn dev
+
+run-sb:
+	cd app && yarn sb
+
+run-test-js:
+	cd app && yarn test

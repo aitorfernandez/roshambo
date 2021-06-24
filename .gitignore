@@ -8,3 +8,5 @@
 kko
 
 .env.*.redis
+
+node_modules

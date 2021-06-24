@@ -1,0 +1,31 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "jest/no-mocks-import": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react/display-name": "off",
+    "semi": [2, "never"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
