@@ -18,10 +18,6 @@ export const AppGlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  html {
-    font-size: ${t('fontBaseSize')}px;
-  }
-
   body {
     -moz-font-feature-settings: 'liga' on;
     -moz-osx-font-smoothing: grayscale;

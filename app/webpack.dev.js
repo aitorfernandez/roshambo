@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common.js')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = merge(common, {
   mode: 'development',
@@ -10,6 +11,9 @@ module.exports = merge(common, {
     historyApiFallback: true,
     port: 3003,
   },
+  plugins: [
+    new ESLintPlugin(),
+  ],
   module: {
     rules: [
       {
@@ -29,7 +33,6 @@ module.exports = merge(common, {
         exclude: /node_modules/,
         use: [
           'babel-loader',
-          'eslint-loader',
         ],
       },
     ],

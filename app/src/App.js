@@ -5,8 +5,10 @@ import {
   Route,
   Switch,
 } from 'react-router-dom'
+import { ApolloProvider } from '@apollo/client'
 
 import { routes } from './routes'
+import { useApollo } from './hooks/useApollo'
 
 function RenderRoute({
   component: Component,
@@ -35,14 +37,16 @@ function RouteWithSubRoutes(route) {
 
 export function App() {
   return (
-    <Router>
-      <Switch>
-      {
-        routes.map(({ ...props }, i) => (
-          <RouteWithSubRoutes key={i} { ...props } />
-        ))
-      }
-      </Switch>
-    </Router>
+    <ApolloProvider { ...{ client: useApollo() } }>
+      <Router>
+        <Switch>
+        {
+          routes.map(({ ...props }, i) => (
+            <RouteWithSubRoutes key={i} { ...props } />
+          ))
+        }
+        </Switch>
+      </Router>
+    </ApolloProvider>
   )
 }
