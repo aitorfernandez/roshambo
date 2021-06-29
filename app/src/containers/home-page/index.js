@@ -2,7 +2,7 @@ import React from 'react'
 
 import { AppContent } from '../../components/app-content'
 import { Header } from '../../components/header'
-import { HeroBanner } from '../../components/hero-banner'
+import { HeroForm } from '../../components/hero-form'
 import { Ranking } from '../../components/ranking'
 
 export function HomePage() {
@@ -10,7 +10,7 @@ export function HomePage() {
     <AppContent
       header={<Header />}
     >
-      <HeroBanner />
+      <HeroForm />
       <Ranking />
     </AppContent>
   )
