@@ -1,8 +1,11 @@
 package resolver
 
 import (
+	"context"
+
 	pb "github.com/aitorfernandez/roshambo/proto"
-	"github.com/graph-gophers/graphql-go"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func rankingRes(r *pb.Ranking, err error) (*RankingResolver, error) {
@@ -15,11 +18,6 @@ func rankingRes(r *pb.Ranking, err error) (*RankingResolver, error) {
 // RankingResolver resolves ranking GraphQL type.
 type RankingResolver struct {
 	ranking *pb.Ranking
-}
-
-// ID resolves id field.
-func (r RankingResolver) ID() graphql.ID {
-	return graphql.ID(r.ranking.ID)
 }
 
 // Draw resolves draw field.
@@ -35,6 +33,18 @@ func (r RankingResolver) Lose() int32 {
 // TotalRounds resolves totalRounds field.
 func (r RankingResolver) TotalRounds() int32 {
 	return r.ranking.TotalRounds
+}
+
+// Username resolves username field.
+func (r RankingResolver) Username(ctx context.Context) (string, error) {
+	p, err := newProfileByAccount(ctx, r.ranking.AccountID)
+	if err != nil {
+		if e, ok := status.FromError(err); ok && e.Code() == codes.NotFound {
+			return "anonymous", nil
+		}
+		return "", err
+	}
+	return p.Username(), nil
 }
 
 // Win resolves win field.

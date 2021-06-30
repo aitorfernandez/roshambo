@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   gql,
-  useMutation,
   useQuery,
 } from '@apollo/client'
 

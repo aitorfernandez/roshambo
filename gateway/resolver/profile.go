@@ -35,6 +35,6 @@ func (r ProfileResolver) Avatar() *string {
 }
 
 // Username resolves username field.
-func (r ProfileResolver) Username() *string {
+func (r ProfileResolver) Username() string {
 	return r.profile.Username
 }

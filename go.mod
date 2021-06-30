@@ -15,6 +15,7 @@ require (
 	github.com/graph-gophers/graphql-go v1.1.0
 	github.com/lib/pq v1.10.2
 	github.com/lucsky/cuid v1.2.0
+	github.com/rs/cors v1.7.0 // indirect
 	github.com/stretchr/testify v1.7.0
 	google.golang.org/grpc v1.38.0
 	google.golang.org/protobuf v1.26.0

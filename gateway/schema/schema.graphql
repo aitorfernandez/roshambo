@@ -7,13 +7,14 @@ type Account {
 type Profile {
   accountID: ID!
   avatar: String
-  username: String
+  username: String!
 }
 
 type Ranking {
   draw: Int!
   lose: Int!
   totalRounds: Int!
+  username: String!
   win: Int!
 }
 

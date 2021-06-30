@@ -14,7 +14,7 @@ type Profile struct {
 	Avatar    *string
 	CreatedAt int64
 	UpdatedAt int64
-	Username  *string
+	Username  string
 }
 
 // Scan scans a profile row.

@@ -13,6 +13,7 @@ import (
 	"github.com/aitorfernandez/roshambo/pkg/env"
 	"github.com/gorilla/mux"
 	"github.com/graph-gophers/graphql-go"
+	"github.com/rs/cors"
 )
 
 func die(err error) {
@@ -40,14 +41,24 @@ func main() {
 	m := mux.NewRouter().StrictSlash(true)
 	m.Use(middleware.Addr)
 	m.Handle("/graphql", gql)
+
+	var h http.Handler
 	if env.MustHget("app", "env") == "dev" {
 		m.Handle("/", handler.NewGraphiQL())
+
+		corsWrapper := cors.New(cors.Options{
+			AllowedMethods: []string{"GET", "POST"},
+			AllowedHeaders: []string{"Content-Type", "Origin", "Accept", "*"},
+		})
+		h = corsWrapper.Handler(m)
+	} else {
+		h = m
 	}
 
 	// Configure the HTTP server.
 	srv := &http.Server{
 		Addr:           env.MustHget("gateway", "addr"),
-		Handler:        m,
+		Handler:        h,
 		MaxHeaderBytes: http.DefaultMaxHeaderBytes,
 	}
 	if err = srv.ListenAndServe(); err != nil {

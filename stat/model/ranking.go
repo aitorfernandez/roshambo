@@ -31,7 +31,6 @@ func (r *Ranking) Scan(scanner interface {
 // Proto creates a ranking proto model from ranking.
 func (r Ranking) Proto() *pb.Ranking {
 	return &pb.Ranking{
-		ID:          r.ID,
 		AccountID:   r.AccountID,
 		Draw:        r.Draw,
 		Lose:        r.Lose,
