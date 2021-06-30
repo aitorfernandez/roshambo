@@ -4,6 +4,7 @@ import (
 	"context"
 
 	pb "github.com/aitorfernandez/roshambo/proto"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // CreateStat sends CreateStat request to statServer.
@@ -27,4 +28,13 @@ func (c Client) ListStatsByAccount(ctx context.Context, req *pb.ListStatsByAccou
 		return nil, err
 	}
 	return res.Stats, nil
+}
+
+// ListRankings sends ListRankings request to statServer.
+func (c Client) ListRankings(ctx context.Context, req *emptypb.Empty) ([]*pb.Ranking, error) {
+	res, err := pb.NewStatServiceClient(c.statConn).ListRankings(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.Rankings, nil
 }

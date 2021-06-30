@@ -2,7 +2,6 @@ type Account {
   id: ID!
   email: String!
   profile: Profile
-  stats: [Stat]!
 }
 
 type Profile {
