@@ -2,6 +2,7 @@ package resolver
 
 import (
 	pb "github.com/aitorfernandez/roshambo/proto"
+	"github.com/graph-gophers/graphql-go"
 )
 
 func rankingRes(r *pb.Ranking, err error) (*RankingResolver, error) {
@@ -14,6 +15,11 @@ func rankingRes(r *pb.Ranking, err error) (*RankingResolver, error) {
 // RankingResolver resolves ranking GraphQL type.
 type RankingResolver struct {
 	ranking *pb.Ranking
+}
+
+// ID resolves id field.
+func (r RankingResolver) ID() graphql.ID {
+	return graphql.ID(r.ranking.ID)
 }
 
 // Draw resolves draw field.
