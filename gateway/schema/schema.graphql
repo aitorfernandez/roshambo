@@ -11,6 +11,13 @@ type Profile {
   username: String
 }
 
+type Ranking {
+  draw: Int!
+  lose: Int!
+  totalRounds: Int!
+  win: Int!
+}
+
 type ValidateTokenPayload {
   id: ID!
   jwt: String!
@@ -23,6 +30,8 @@ input ValidateTokenInput {
 
 type Query {
   account(id: ID!): Account!
+
+  rankings: [Ranking]!
 }
 
 type Mutation {

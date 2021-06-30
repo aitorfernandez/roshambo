@@ -1,10 +1,10 @@
 create table if not exists ranking (
   id serial primary key,
   account_id varchar not null unique,
+  draw smallint not null default 0,
+  lose smallint not null default 0,
   total_rounds int not null,
-  win smallint,
-  lose smallint,
-  draw smallint
+  win smallint not null default 0
 );
 
 create or replace function moves(

@@ -10,6 +10,7 @@ import (
 	"github.com/aitorfernandez/roshambo/stat/store"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // statServer is the API for statServer service.
@@ -68,5 +69,23 @@ func (s statServer) ListStatsByAccount(ctx context.Context, req *pb.ListStatsByA
 	}
 	return &pb.ListStatsByAccountRes{
 		Stats: ss,
+	}, nil
+}
+
+// ListRankings lists all rankings.
+func (s statServer) ListRankings(ctx context.Context, req *emptypb.Empty) (*pb.ListRankingsRes, error) {
+	var (
+		rankings []*model.Ranking
+		err      error
+	)
+	if rankings, err = s.store.Rankings(ctx); err != nil {
+		return nil, err
+	}
+	rr := make([]*pb.Ranking, 0, len(rankings))
+	for _, r := range rankings {
+		rr = append(rr, r.Proto())
+	}
+	return &pb.ListRankingsRes{
+		Rankings: rr,
 	}, nil
 }
