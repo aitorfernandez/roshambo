@@ -6,7 +6,7 @@ import (
 	"github.com/graph-gophers/graphql-go"
 )
 
-func validateTokenRes(a *pb.Account, err error) (*ValidateTokenPayloadResolver, error) {
+func validateTokenPayloadRes(a *pb.Account, err error) (*ValidateTokenPayloadResolver, error) {
 	if err != nil {
 		return nil, err
 	}

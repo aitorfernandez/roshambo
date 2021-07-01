@@ -74,12 +74,6 @@ func (a Account) GenerateToken(ts int64, ip string) (string, error) {
 	}, "-"), nil
 }
 
-func hmacsha256(key []byte, data []byte) []byte {
-	hash := hmac.New(sha256.New, key)
-	hash.Write(data)
-	return hash.Sum(nil)
-}
-
 // ValidateToken validates a token with an account.
 func (a Account) ValidateToken(token, ip string) bool {
 	var (
@@ -97,4 +91,10 @@ func (a Account) ValidateToken(token, ip string) bool {
 		return false
 	}
 	return t == token
+}
+
+func hmacsha256(key []byte, data []byte) []byte {
+	hash := hmac.New(sha256.New, key)
+	hash.Write(data)
+	return hash.Sum(nil)
 }

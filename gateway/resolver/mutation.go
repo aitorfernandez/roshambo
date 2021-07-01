@@ -44,5 +44,5 @@ func (r Resolver) ValidateToken(ctx context.Context, args validateTokenArgs) (*V
 		IP:    ctx.Value(middleware.RemoteAddrKey).(string),
 		Token: args.Input.Token,
 	})
-	return validateTokenRes(res, err)
+	return validateTokenPayloadRes(res, err)
 }
