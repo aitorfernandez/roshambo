@@ -28,7 +28,7 @@ func (s mailServer) SendToken(ctx context.Context, req *pb.SendTokenReq) (*empty
 		ID:    req.ID,
 		Token: req.Token,
 	}
-	if body, err = getContent("send_token.html", data); err != nil {
+	if body, err = getContent("send_auth_token.html", data); err != nil {
 		log.Println(err)
 		return &emptypb.Empty{}, nil
 	}

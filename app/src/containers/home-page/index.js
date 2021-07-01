@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   gql,
+  useMutation,
   useQuery,
 } from '@apollo/client'
 
@@ -10,12 +11,14 @@ import { HeroForm } from '../../components/hero-form'
 import { RankingItem } from '../../components/ranking-item'
 
 export function HomePage() {
-  const { data, loading, error } = useQuery(HomePageQuery)
+  const { data: query, loading, error } = useQuery(HomePageQuery)
+  const [getStarted, { data: mutation }] = useMutation(HomePageGetStartedMutation)
 
   if (loading) {
     return null
   }
   if (error) {
+    console.error(error)
     return null
   }
 
@@ -23,8 +26,8 @@ export function HomePage() {
     <AppContent
       header={<Header />}
     >
-      <HeroForm />
-      {data.rankings.map((r) => (
+      <HeroForm { ...{ getStarted, ...mutation } } />
+      {query.rankings.map((r) => (
         <RankingItem key={r.username} { ...r } />
       ))}
     </AppContent>
@@ -38,4 +41,12 @@ const HomePageQuery = gql`
     }
   }
   ${RankingItem.fragments.ranking}
+`
+
+const HomePageGetStartedMutation = gql`
+  mutation HomePageGetStartedMutation(
+    $email: String!
+  ) {
+    response: getStarted(email: $email)
+  }
 `

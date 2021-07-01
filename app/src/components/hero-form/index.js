@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 export function HeroForm({
   getStarted,
-  sent,
+  response,
 }) {
   const {
     handleSubmit,
@@ -37,7 +37,7 @@ export function HeroForm({
     </form>
   )
 
-  const response = (
+  const message = (
     <p>
       Great! Check your email for the magic link.
     </p>
@@ -48,12 +48,12 @@ export function HeroForm({
       <h2>
         Rock. Paper. Scissors.
       </h2>
-      {sent ? response : form}
+      {response ? message : form}
     </div>
   )
 }
 
 HeroForm.propTypes = {
   getStarted: PropTypes.func.isRequired,
-  sent: PropTypes.bool,
+  response: PropTypes.bool,
 }
