@@ -81,3 +81,29 @@ func (r Resolver) DeleteStatsByAccount(ctx context.Context, args deleteStatsByAc
 	}
 	return res, nil
 }
+
+//
+// Profile
+//
+
+type setProfileInput struct {
+	AccountID graphql.ID
+	Avatar    *string
+	Username  string
+}
+
+type setProfileArgs struct {
+	Input setProfileInput
+}
+
+// SetProfile resolves setProfile mutation.
+func (r Resolver) SetProfile(ctx context.Context, args setProfileArgs) (*ProfileResolver, error) {
+	res, err := r.client.SetProfile(ctx, &pb.SetProfileReq{
+		Profile: &pb.Profile{
+			AccountID: gqlIDToString(args.Input.AccountID),
+			Avatar:    args.Input.Avatar,
+			Username:  args.Input.Username,
+		},
+	})
+	return profileRes(res, err)
+}

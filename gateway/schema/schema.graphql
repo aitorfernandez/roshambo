@@ -42,6 +42,12 @@ input CreateStatInput {
   playerMove: Int!
 }
 
+input SetProfileInput {
+  accountID: ID!
+  avatar: String
+  username: String!
+}
+
 type Query {
   account(id: ID!): Account!
 
@@ -55,6 +61,8 @@ type Mutation {
 
   createStat(input: CreateStatInput!): Stat!
   deleteStatsByAccount(accountID: ID!): Int!
+
+  setProfile(input: SetProfileInput!): Profile!
 }
 
 schema {

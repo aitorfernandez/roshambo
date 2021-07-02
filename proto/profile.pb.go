@@ -142,6 +142,53 @@ func (x *GetProfileByAccountReq) GetAccountID() string {
 	return ""
 }
 
+type SetProfileReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Profile *Profile `protobuf:"bytes,1,opt,name=profile,proto3" json:"profile,omitempty"`
+}
+
+func (x *SetProfileReq) Reset() {
+	*x = SetProfileReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_profile_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetProfileReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetProfileReq) ProtoMessage() {}
+
+func (x *SetProfileReq) ProtoReflect() protoreflect.Message {
+	mi := &file_profile_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetProfileReq.ProtoReflect.Descriptor instead.
+func (*SetProfileReq) Descriptor() ([]byte, []int) {
+	return file_profile_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SetProfileReq) GetProfile() *Profile {
+	if x != nil {
+		return x.Profile
+	}
+	return nil
+}
+
 var File_profile_proto protoreflect.FileDescriptor
 
 var file_profile_proto_rawDesc = []byte{
@@ -157,13 +204,18 @@ var file_profile_proto_rawDesc = []byte{
 	0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x42, 0x79, 0x41, 0x63, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x49, 0x44, 0x32, 0x4a, 0x0a, 0x0e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x38, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f,
-	0x66, 0x69, 0x6c, 0x65, 0x42, 0x79, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x17, 0x2e,
-	0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x42, 0x79, 0x41, 0x63, 0x63, 0x6f,
-	0x75, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x08, 0x2e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
-	0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x6e, 0x74, 0x49, 0x44, 0x22, 0x33, 0x0a, 0x0d, 0x53, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69,
+	0x6c, 0x65, 0x52, 0x65, 0x71, 0x12, 0x22, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x08, 0x2e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
+	0x52, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x32, 0x72, 0x0a, 0x0e, 0x50, 0x72, 0x6f,
+	0x66, 0x69, 0x6c, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x38, 0x0a, 0x13, 0x47,
+	0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x42, 0x79, 0x41, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x12, 0x17, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x42,
+	0x79, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x08, 0x2e, 0x50, 0x72,
+	0x6f, 0x66, 0x69, 0x6c, 0x65, 0x12, 0x26, 0x0a, 0x0a, 0x53, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66,
+	0x69, 0x6c, 0x65, 0x12, 0x0e, 0x2e, 0x53, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
+	0x52, 0x65, 0x71, 0x1a, 0x08, 0x2e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x42, 0x09, 0x5a,
+	0x07, 0x2e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -178,19 +230,23 @@ func file_profile_proto_rawDescGZIP() []byte {
 	return file_profile_proto_rawDescData
 }
 
-var file_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_profile_proto_goTypes = []interface{}{
 	(*Profile)(nil),                // 0: Profile
 	(*GetProfileByAccountReq)(nil), // 1: GetProfileByAccountReq
+	(*SetProfileReq)(nil),          // 2: SetProfileReq
 }
 var file_profile_proto_depIdxs = []int32{
-	1, // 0: ProfileService.GetProfileByAccount:input_type -> GetProfileByAccountReq
-	0, // 1: ProfileService.GetProfileByAccount:output_type -> Profile
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: SetProfileReq.profile:type_name -> Profile
+	1, // 1: ProfileService.GetProfileByAccount:input_type -> GetProfileByAccountReq
+	2, // 2: ProfileService.SetProfile:input_type -> SetProfileReq
+	0, // 3: ProfileService.GetProfileByAccount:output_type -> Profile
+	0, // 4: ProfileService.SetProfile:output_type -> Profile
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_profile_proto_init() }
@@ -223,6 +279,18 @@ func file_profile_proto_init() {
 				return nil
 			}
 		}
+		file_profile_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SetProfileReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_profile_proto_msgTypes[0].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -231,7 +299,7 @@ func file_profile_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_profile_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -258,6 +326,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ProfileServiceClient interface {
 	GetProfileByAccount(ctx context.Context, in *GetProfileByAccountReq, opts ...grpc.CallOption) (*Profile, error)
+	SetProfile(ctx context.Context, in *SetProfileReq, opts ...grpc.CallOption) (*Profile, error)
 }
 
 type profileServiceClient struct {
@@ -277,9 +346,19 @@ func (c *profileServiceClient) GetProfileByAccount(ctx context.Context, in *GetP
 	return out, nil
 }
 
+func (c *profileServiceClient) SetProfile(ctx context.Context, in *SetProfileReq, opts ...grpc.CallOption) (*Profile, error) {
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, "/ProfileService/SetProfile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProfileServiceServer is the server API for ProfileService service.
 type ProfileServiceServer interface {
 	GetProfileByAccount(context.Context, *GetProfileByAccountReq) (*Profile, error)
+	SetProfile(context.Context, *SetProfileReq) (*Profile, error)
 }
 
 // UnimplementedProfileServiceServer can be embedded to have forward compatible implementations.
@@ -288,6 +367,9 @@ type UnimplementedProfileServiceServer struct {
 
 func (*UnimplementedProfileServiceServer) GetProfileByAccount(context.Context, *GetProfileByAccountReq) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProfileByAccount not implemented")
+}
+func (*UnimplementedProfileServiceServer) SetProfile(context.Context, *SetProfileReq) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetProfile not implemented")
 }
 
 func RegisterProfileServiceServer(s *grpc.Server, srv ProfileServiceServer) {
@@ -312,6 +394,24 @@ func _ProfileService_GetProfileByAccount_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfileService_SetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetProfileReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).SetProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ProfileService/SetProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).SetProfile(ctx, req.(*SetProfileReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ProfileService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "ProfileService",
 	HandlerType: (*ProfileServiceServer)(nil),
@@ -319,6 +419,10 @@ var _ProfileService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProfileByAccount",
 			Handler:    _ProfileService_GetProfileByAccount_Handler,
+		},
+		{
+			MethodName: "SetProfile",
+			Handler:    _ProfileService_SetProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

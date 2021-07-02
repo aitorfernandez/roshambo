@@ -13,6 +13,11 @@ message GetProfileByAccountReq {
   string accountID = 1;
 }
 
+message SetProfileReq {
+  Profile profile = 1;
+}
+
 service ProfileService {
   rpc GetProfileByAccount(GetProfileByAccountReq) returns (Profile);
+  rpc SetProfile(SetProfileReq) returns (Profile);
 }

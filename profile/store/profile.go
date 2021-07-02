@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/aitorfernandez/roshambo/pkg/null"
 	"github.com/aitorfernandez/roshambo/pkg/postgres"
 	"github.com/aitorfernandez/roshambo/profile/model"
 )
@@ -39,5 +40,25 @@ func (s Store) ProfileByAccount(ctx context.Context, accountID string) (*model.P
 	select * from profile where account_id = $1
 	`
 	row := s.db.QueryRowContext(ctx, q, accountID)
+	return profileRow(row)
+}
+
+// SetProfile creates or updates the given profile.
+func (s Store) SetProfile(ctx context.Context, p *model.Profile) (*model.Profile, error) {
+	q := `
+	insert into profile (id, account_id, avatar, username)
+	values
+	  ($1, $2, $3, $4)
+	on conflict
+	  (account_id)
+	do update set
+	  avatar = coalesce($3, avatar),
+	  username = $4
+	returning
+	  *
+	`
+	row := s.db.QueryRowContext(
+		ctx, q, p.ID, p.AccountID, null.SQLString(p.Avatar), p.Username,
+	)
 	return profileRow(row)
 }

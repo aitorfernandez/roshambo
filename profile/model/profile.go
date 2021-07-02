@@ -7,6 +7,9 @@ import (
 	validation "github.com/go-ozzo/ozzo-validation"
 )
 
+// ProfilePrefix for id generation.
+const ProfilePrefix = "profile"
+
 // Profile determines the profile structure.
 type Profile struct {
 	ID        string
