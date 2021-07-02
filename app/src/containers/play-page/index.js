@@ -60,7 +60,9 @@ export function PlayPage() {
         <StatCreateButton { ...{ createStat, playerMove: 2 } } />
         <StatDeleteButton { ...{ deleteStats } } />
       </div>
-      <StatItem />
+      {data.account.stats.map((s) => (
+        <StatItem key={s.id} { ...s } />
+      ))}
     </AppContent>
   )
 }
@@ -71,8 +73,12 @@ const PlayPageAccountQuery = gql`
   ) {
     account(id: $id) {
       id
+      stats {
+        ...StatItemStatFragment
+      }
     }
   }
+  ${StatItem.fragments.stat}
 `
 
 const PlayPageCreateStatMutation = gql`
