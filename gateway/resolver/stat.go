@@ -37,11 +37,6 @@ func (r StatResolver) ID() graphql.ID {
 	return graphql.ID(r.stat.ID)
 }
 
-// AccountID resolves accountID field.
-func (r StatResolver) AccountID() graphql.ID {
-	return graphql.ID(r.stat.AccountID)
-}
-
 // ComputerMove resolves computerMove field.
 func (r StatResolver) ComputerMove() int32 {
 	return r.stat.ComputerMove

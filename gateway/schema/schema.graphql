@@ -2,12 +2,20 @@ type Account {
   id: ID!
   email: String!
   profile: Profile
+  stats: [Stat]!
 }
 
 type Profile {
   accountID: ID!
   avatar: String
   username: String!
+}
+
+type Stat {
+  id: ID!
+  computerMove: Int!
+  playerMove: Int!
+  round: Int!
 }
 
 type Ranking {
@@ -28,6 +36,11 @@ input ValidateTokenInput {
   token: String!
 }
 
+input CreateStatInput {
+  accountID: ID!
+  playerMove: Int!
+}
+
 type Query {
   account(id: ID!): Account!
 
@@ -38,6 +51,9 @@ type Mutation {
   getStarted(email: String!): Boolean!
 
   validateToken(input: ValidateTokenInput!): ValidateTokenPayload!
+
+  createStat(input: CreateStatInput!): Stat!
+  deleteStatsByAccount(accountID: ID!): Int!
 }
 
 schema {

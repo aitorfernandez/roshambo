@@ -46,3 +46,38 @@ func (r Resolver) ValidateToken(ctx context.Context, args validateTokenArgs) (*V
 	})
 	return validateTokenPayloadRes(res, err)
 }
+
+type createStatInput struct {
+	AccountID  graphql.ID
+	PlayerMove int32
+}
+
+type createStatArgs struct {
+	Input createStatInput
+}
+
+// CreateStat resolves createStat mutation.
+func (r Resolver) CreateStat(ctx context.Context, args createStatArgs) (*StatResolver, error) {
+	res, err := r.client.CreateStat(ctx, &pb.CreateStatReq{
+		Stat: &pb.Stat{
+			AccountID:  gqlIDToString(args.Input.AccountID),
+			PlayerMove: args.Input.PlayerMove,
+		},
+	})
+	return statRes(res, err)
+}
+
+type deleteStatsByAccountArgs struct {
+	AccountID graphql.ID
+}
+
+// DeleteStatsByAccount relsolves deleteStatsByAccount mutation.
+func (r Resolver) DeleteStatsByAccount(ctx context.Context, args deleteStatsByAccountArgs) (int32, error) {
+	res, err := r.client.DeleteStatsByAccount(ctx, &pb.DeleteStatsByAccountReq{
+		AccountID: gqlIDToString(args.AccountID),
+	})
+	if err != nil {
+		return 0, nil
+	}
+	return res, nil
+}
