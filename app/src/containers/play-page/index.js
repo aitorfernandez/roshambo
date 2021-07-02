@@ -55,9 +55,9 @@ export function PlayPage() {
       <StatResult { ...data.account } />
       <StatScore { ...data.account } />
       <div>
-        <StatCreateButton { ...{ createStat } } />
-        <StatCreateButton { ...{ createStat } } />
-        <StatCreateButton { ...{ createStat } } />
+        <StatCreateButton { ...{ createStat, playerMove: 0 } } />
+        <StatCreateButton { ...{ createStat, playerMove: 1 } } />
+        <StatCreateButton { ...{ createStat, playerMove: 2 } } />
         <StatDeleteButton { ...{ deleteStats } } />
       </div>
       <StatItem />
