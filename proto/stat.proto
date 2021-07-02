@@ -13,11 +13,12 @@ message Stat {
 }
 
 message Ranking {
-  string accountID = 1;
-  int32 draw = 2;
-  int32 lose = 3;
-  int32 totalRounds = 4;
-  int32 win = 5;
+  int32 ID = 1;
+  string accountID = 2;
+  int32 draw = 3;
+  int32 lose = 4;
+  int32 totalRounds = 5;
+  int32 win = 6;
 }
 
 message CreateStatReq {

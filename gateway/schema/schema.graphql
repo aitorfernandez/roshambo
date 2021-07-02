@@ -19,6 +19,7 @@ type Stat {
 }
 
 type Ranking {
+  id: ID!
   draw: Int!
   lose: Int!
   totalRounds: Int!

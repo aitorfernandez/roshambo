@@ -27,6 +27,7 @@ RankingItem.propTypes = {
 RankingItem.fragments = {
   ranking: gql`
     fragment RankingItemRankingFragment on Ranking {
+      id
       draw
       lose
       totalRounds

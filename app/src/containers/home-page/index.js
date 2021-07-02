@@ -28,7 +28,7 @@ export function HomePage() {
     >
       <HeroForm { ...{ getStarted, ...mutation } } />
       {query.rankings.map((r) => (
-        <RankingItem key={r.username} { ...r } />
+        <RankingItem key={r.id} { ...r } />
       ))}
     </AppContent>
   )

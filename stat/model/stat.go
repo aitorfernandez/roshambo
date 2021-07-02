@@ -40,6 +40,7 @@ func (s Stat) Validate() error {
 // Proto creates a stat proto model from stat.
 func (s Stat) Proto() *pb.Stat {
 	return &pb.Stat{
+		ID:           s.ID,
 		AccountID:    s.AccountID,
 		ComputerMove: s.ComputerMove,
 		PlayerMove:   s.PlayerMove,
