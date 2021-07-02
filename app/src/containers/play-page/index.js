@@ -4,9 +4,10 @@ import {
   useMutation,
   useQuery,
 } from '@apollo/client'
-
 import { useCookies } from 'react-cookie'
+
 import { AppContent } from '../../components/app-content'
+import { fromAccount } from '../../store'
 import { Header } from '../../components/header'
 import { Profile } from '../../components/profile'
 import { StatCreateButton } from '../../components/stat-create-button'
@@ -26,12 +27,12 @@ export function PlayPage() {
 
   const [createStat] = useMutation(PlayPageCreateStatMutation, {
     update: (cache, { data }) => {
-      console.log(cache, data)
+      fromAccount.addStat(cache, data.stat, { id })
     },
   })
   const [deleteStats] = useMutation(PlayPageDeleteStatsMutation, {
     update: (cache) => {
-      console.log(cache)
+      cache.reset()
     },
   })
 
@@ -67,7 +68,7 @@ export function PlayPage() {
   )
 }
 
-const PlayPageAccountQuery = gql`
+export const PlayPageAccountQuery = gql`
   query PlayPageAccountQuery(
     $id: ID!
   ) {
