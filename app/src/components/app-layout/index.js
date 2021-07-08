@@ -10,7 +10,10 @@ export function AppLayout({
 }) {
   return (
     <ThemeProvider { ...{ theme } }>
-      <AppGlobalStyle />
+      <AppGlobalStyle
+        bg="gray.7"
+        c="white.5"
+      />
       {children}
     </ThemeProvider>
   )

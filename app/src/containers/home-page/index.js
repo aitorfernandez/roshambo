@@ -6,6 +6,7 @@ import {
 } from '@apollo/client'
 
 import { AppContent } from '../../components/app-content'
+import { Footer } from '../../components/footer'
 import { Header } from '../../components/header'
 import { HeroForm } from '../../components/hero-form'
 import { RankingItem } from '../../components/ranking-item'
@@ -25,6 +26,7 @@ export function HomePage() {
   return (
     <AppContent
       header={<Header />}
+      footer={<Footer />}
     >
       <HeroForm { ...{ getStarted, ...mutation } } />
       {query.rankings.map((r) => (

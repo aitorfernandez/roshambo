@@ -1,4 +1,6 @@
 export { Box } from './box'
+export { ButtonBase } from './button-base'
+export { Button } from './button'
 export { Flex } from './flex'
 export { Heading } from './heading'
 export { Icon } from './icon'
