@@ -18,10 +18,7 @@ export function AppContent({
       p={[0, 4, 0, 4]}
     >
       {header && (
-        <Header
-          m={[0, 0, 8, 0]}
-          p={[5, 0, 5, 0]}
-        >
+        <Header>
           {header}
         </Header>
       )}

@@ -1,6 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
+
+import { t } from '../../theme'
+import {
+  Button,
+  Flex,
+  Heading,
+  Input,
+  Paragraph,
+} from '../../ui'
 
 export function HeroForm({
   getStarted,
@@ -21,35 +31,37 @@ export function HeroForm({
   }
 
   const form = (
-    <form
+    <Form
       onSubmit={handleSubmit(onSubmit)}
     >
-      <input
+      <StyledInput
         placeholder="Email here for start..."
         { ...register("email", { required: true, pattern: /^\S+@\S+$/i})}
       />
-      <button
+      <StyledButton
         disabled={!isValid}
         type="submit"
       >
         Get Started
-      </button>
-    </form>
+      </StyledButton>
+    </Form>
   )
 
   const message = (
-    <p>
+    <Paragraph>
       Great! Check your email for the magic link.
-    </p>
+    </Paragraph>
   )
 
   return (
-    <div>
-      <h2>
+    <Flex
+      direction="column"
+    >
+      <Heading>
         Rock. Paper. Scissors.
-      </h2>
+      </Heading>
       {response ? message : form}
-    </div>
+    </Flex>
   )
 }
 
@@ -57,3 +69,18 @@ HeroForm.propTypes = {
   getStarted: PropTypes.func.isRequired,
   response: PropTypes.bool,
 }
+
+const Form = styled(Flex).attrs({
+  as: 'form',
+})`
+  width: 100%;
+`
+
+const StyledInput = styled(Input)`
+  flex: 4 0 0;
+`
+
+const StyledButton = styled(Button)`
+  flex: 2 0 0;
+  margin-left: ${t('space.4')};
+`

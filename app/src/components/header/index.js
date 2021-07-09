@@ -11,7 +11,9 @@ import {
 export function Header() {
   return (
     <Link to="/">
-      <Flex>
+      <Flex
+        p={[5, 0, 5, 0]}
+      >
         {['rock', 'paper', 'scissors'].map((item) => (
           <StyledIcon
             c="white.5"
