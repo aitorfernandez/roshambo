@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { useCookies } from 'react-cookie'
+
+import { Flex } from '../../ui'
+import { StatButton } from '../stat-button'
+import { t } from '../../theme'
 
 export function StatDeleteButton({
   deleteStats,
@@ -16,16 +21,21 @@ export function StatDeleteButton({
   }
 
   return (
-    <div>
-      <button
+    <StyledFlex>
+      <StatButton
+        c="red.5"
+        fs={6}
+        icon="trash"
         onClick={onSubmit}
-      >
-        StatDeleteButton
-      </button>
-    </div>
+      />
+    </StyledFlex>
   )
 }
 
 StatDeleteButton.propTypes = {
   deleteStats: PropTypes.func.isRequired,
 }
+
+const StyledFlex = styled(Flex)`
+  flex: 1 1 auto;
+`

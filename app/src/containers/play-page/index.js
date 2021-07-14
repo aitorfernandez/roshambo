@@ -7,6 +7,8 @@ import {
 import { useCookies } from 'react-cookie'
 
 import { AppContent } from '../../components/app-content'
+import { Flex } from '../../ui'
+import { Footer } from '../../components/footer'
 import { fromAccount } from '../../store'
 import { Header } from '../../components/header'
 import { Profile } from '../../components/profile'
@@ -52,15 +54,16 @@ export function PlayPage() {
           <Profile />
         </>
       }
+      footer={<Footer />}
     >
       <StatResult { ...data.account } />
       <StatScore { ...data.account } />
-      <div>
+      <Flex>
         <StatCreateButton { ...{ createStat, playerMove: 0 } } />
         <StatCreateButton { ...{ createStat, playerMove: 1 } } />
         <StatCreateButton { ...{ createStat, playerMove: 2 } } />
         <StatDeleteButton { ...{ deleteStats } } />
-      </div>
+      </Flex>
       {data.account.stats.map((s) => (
         <StatItem key={s.id} { ...s } />
       ))}

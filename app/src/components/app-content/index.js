@@ -18,7 +18,9 @@ export function AppContent({
       p={[0, 4, 0, 4]}
     >
       {header && (
-        <Header>
+        <Header
+          direction="column"
+        >
           {header}
         </Header>
       )}

@@ -4,3 +4,5 @@ export const cookieOpts = {
   domain: 'localhost',
   sameSite: 'lax',
 }
+
+export const moves = ['rock', 'paper', 'scissors']
