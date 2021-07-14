@@ -5,7 +5,6 @@ import { useCookies } from 'react-cookie'
 
 import { Flex } from '../../ui'
 import { StatButton } from '../stat-button'
-import { t } from '../../theme'
 
 export function StatDeleteButton({
   deleteStats,
