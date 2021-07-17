@@ -56,7 +56,7 @@ export function PlayPage() {
       }
       footer={<Footer />}
     >
-      <StatResult { ...data.account } />
+      <StatResult { ...data.account.stats[0] } />
       <StatScore { ...data.account } />
       <Flex>
         <StatCreateButton { ...{ createStat, playerMove: 0 } } />
