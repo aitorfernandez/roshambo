@@ -87,9 +87,13 @@ export const PlayPageAccountQuery = gql`
       stats {
         ...StatItemStatFragment
       }
+      profile {
+        ...ProfileFragment
+      }
     }
   }
   ${StatItem.fragments.stat}
+  ${Profile.fragments.profile}
 `
 
 const PlayPageCreateStatMutation = gql`

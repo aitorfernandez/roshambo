@@ -52,7 +52,7 @@ func (s Store) SetProfile(ctx context.Context, p *model.Profile) (*model.Profile
 	on conflict
 	  (account_id)
 	do update set
-	  avatar = coalesce($3, avatar),
+	  avatar = coalesce($3, profile.avatar),
 	  username = $4
 	returning
 	  *
