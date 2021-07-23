@@ -59,6 +59,7 @@ export function Profile({
       />
       <StyledButtonBase onClick={onClick}>
         <Icon
+          fs={4}
           c="gray.7"
           icon="user-ninja"
         />
