@@ -18,6 +18,21 @@ function addStat(cache, stat, vars) {
   writeQuery(cache, PlayPageAccountQuery, data, vars)
 }
 
+function addProfile(cache, profile, vars) {
+  const query = readQuery(cache, PlayPageAccountQuery, vars)
+  if (!query) {
+    return
+  }
+  const data = {
+    account: {
+      ...query.account,
+      profile,
+    },
+  }
+  writeQuery(cache, PlayPageAccountQuery, data, vars)
+}
+
 export const fromAccount = {
+  addProfile,
   addStat,
 }

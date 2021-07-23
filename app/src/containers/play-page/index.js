@@ -37,6 +37,13 @@ export function PlayPage() {
       cache.reset()
     },
   })
+  const [setProfile] = useMutation(PlayPageSetProfileMutation, {
+    update: (cache, { data }) => {
+      fromAccount.addProfile(cache, data.profile, {
+        id,
+      })
+    },
+  })
 
   if (loading) {
     return null
@@ -51,7 +58,7 @@ export function PlayPage() {
       header={
         <>
           <Header />
-          <Profile />
+          <Profile { ...{ setProfile, accountID: data.account.id, ...data.account?.profile } } />
         </>
       }
       footer={<Footer />}
@@ -101,4 +108,15 @@ const PlayPageDeleteStatsMutation = gql`
   ) {
     deleteStatsByAccount(accountID: $accountID)
   }
+`
+
+const PlayPageSetProfileMutation = gql`
+  mutation PlayPageSetProfileMutation(
+    $input: SetProfileInput!
+  ) {
+    profile: setProfile(input: $input) {
+      ...ProfileFragment
+    }
+  }
+  ${Profile.fragments.profile}
 `
