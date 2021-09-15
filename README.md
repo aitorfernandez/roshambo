@@ -1,28 +1,33 @@
-# roshambo
+# Roshambo
 
 An overengineering Rock, Paper, Scissors for fun.
 
 ## Roshambo Features
 
-- Passwordless with magic link.
-- Own gRPC microservices structure (gateway, account, profile, stats, mail).
+- GraphQL
+- Dataloader and Cache
+- Passwordless with magic link
+- JWT
+- Own React UI components
+- Own gRPC microservices architecture (gateway, account, profile, stats, mail)
 
 ## Roshambo Tech Tools
 
 ### Frontend
 
 - React
-- Styled Components
 - Apollo GraphQL
-- Storybook
 - Jest
+- Storybook
+- Styled Components
+- Webpack
 
 ### Backend
 
 - Golang
 - gorilla/mux
 - GraphQL
-- Postgress
+- Postgres
 - Redis
 - gRPC and protocol buffers
 - Docker
@@ -58,7 +63,7 @@ make migrate-stat ACTION=up
 
 #### Config
 
-Roshambo use Redis for secret and config variables,
+Roshambo use Redis for handle secrets and config variables
 
 ```sh
 docker-up SRV=roshambo_redis
@@ -69,7 +74,7 @@ Populate environment variables
 make env
 ```
 
-`make env` command will look for a file `.env.dev.redis` in the root of the project. An example of config file is:
+`make env` command will look for a file `.env.dev.redis` in the root project. An example for a config file is:
 
 ```
 HSET app env "dev"
@@ -122,10 +127,14 @@ Install dependencies using `yarn`
 ```sh
 cd app
 yarn install
+```
+
+Run the frontend using `yarn` inside the `app` folder or in the root project using `make`
+
+```sh
 yarn dev
 ```
 
-or in the root of the app
 ```sh
 make run-app
 ```
