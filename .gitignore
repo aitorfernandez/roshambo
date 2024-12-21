@@ -1,0 +1,12 @@
+*.pid
+*.swo
+*.swp
+*.tmp
+.DS_Store
+.tags
+
+kko
+
+.env.*.redis
+
+node_modules
