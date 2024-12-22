@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+message Profile {
+  string ID = 1;
+  string accountID = 2;
+  optional string avatar = 3;
+  string username = 4;
+}
+
+message GetProfileByAccountReq {
+  string accountID = 1;
+}
+
+message SetProfileReq {
+  Profile profile = 1;
+}
+
+service ProfileService {
+  rpc GetProfileByAccount(GetProfileByAccountReq) returns (Profile);
+  rpc SetProfile(SetProfileReq) returns (Profile);
+}

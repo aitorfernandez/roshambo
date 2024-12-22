@@ -1,0 +1,5 @@
+coverage
+jest
+node_modules
+public
+storybook

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "./proto";
+
+message SendTokenReq {
+  string ID = 1;
+  string receiver = 2;
+  string token = 3;
+}
+
+service MailService {
+  rpc SendToken(SendTokenReq) returns (google.protobuf.Empty);
+}

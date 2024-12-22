@@ -1,0 +1,71 @@
+type Account {
+  id: ID!
+  email: String!
+  profile: Profile
+  stats: [Stat]!
+}
+
+type Profile {
+  accountID: ID!
+  avatar: String
+  username: String!
+}
+
+type Stat {
+  id: ID!
+  computerMove: Int!
+  playerMove: Int!
+  round: Int!
+}
+
+type Ranking {
+  id: ID!
+  draw: Int!
+  lose: Int!
+  totalRounds: Int!
+  username: String!
+  win: Int!
+}
+
+type ValidateTokenPayload {
+  id: ID!
+  jwt: String!
+}
+
+input ValidateTokenInput {
+  id: ID!
+  token: String!
+}
+
+input CreateStatInput {
+  accountID: ID!
+  playerMove: Int!
+}
+
+input SetProfileInput {
+  accountID: ID!
+  avatar: String
+  username: String!
+}
+
+type Query {
+  account(id: ID!): Account!
+
+  rankings: [Ranking]!
+}
+
+type Mutation {
+  getStarted(email: String!): Boolean!
+
+  validateToken(input: ValidateTokenInput!): ValidateTokenPayload!
+
+  createStat(input: CreateStatInput!): Stat!
+  deleteStatsByAccount(accountID: ID!): Int!
+
+  setProfile(input: SetProfileInput!): Profile!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

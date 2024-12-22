@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "./proto";
+
+message Stat {
+  string ID = 1;
+  string accountID = 2;
+  int32 computerMove = 3;
+  int32 playerMove = 4;
+  int32 round = 5;
+}
+
+message Ranking {
+  int32 ID = 1;
+  string accountID = 2;
+  int32 draw = 3;
+  int32 lose = 4;
+  int32 totalRounds = 5;
+  int32 win = 6;
+}
+
+message CreateStatReq {
+  Stat stat = 1;
+}
+
+message DeleteStatsByAccountReq {
+  string accountID = 1;
+}
+
+message DeleteStatsByAccountRes {
+  int32 rowsAffected = 1;
+}
+
+message ListStatsByAccountReq {
+  string accountID = 1;
+}
+
+message ListStatsByAccountRes {
+  repeated Stat stats = 1;
+}
+
+message ListRankingsRes {
+  repeated Ranking rankings = 1;
+}
+
+service StatService {
+  rpc CreateStat(CreateStatReq) returns (Stat);
+  rpc DeleteStatsByAccount(DeleteStatsByAccountReq) returns (DeleteStatsByAccountRes);
+  rpc ListStatsByAccount(ListStatsByAccountReq) returns (ListStatsByAccountRes);
+
+  rpc ListRankings(google.protobuf.Empty) returns (ListRankingsRes);
+}

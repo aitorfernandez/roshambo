@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./proto";
+
+message Account {
+  string ID = 1;
+  string email = 2;
+}
+
+message GetAccountReq {
+  string ID = 1;
+}
+
+message GetStartedReq {
+  string email = 1;
+  string IP = 2;
+}
+
+message ValidateTokenReq {
+  string ID = 1;
+  string IP = 2;
+  string token = 3;
+}
+
+service AccountService {
+  rpc GetAccount(GetAccountReq) returns (Account);
+  rpc GetStarted(GetStartedReq) returns (google.protobuf.BoolValue);
+  rpc ValidateToken(ValidateTokenReq) returns (Account);
+}
